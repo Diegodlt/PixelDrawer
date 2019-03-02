@@ -1,25 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+import Pixel from './containers/Pixel/Pixel';
 
 class App extends Component {
+
+  state = {
+    color: "white"
+  }
+
+  changeColor = event => {
+    this.setState({
+      color: event.target.value
+    });
+  }
+
+  // This will allow the Pixel class to get the current color selected
+  getColor = () =>{
+    return this.state.color;
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <input type="color" className="ColorInput" onChange={this.changeColor}/>
+        <Pixel newColor={this.getColor.bind(this)} />
+        <Pixel newColor={this.getColor.bind(this)} />
+        <Pixel newColor={this.getColor.bind(this)} />
+        <Pixel newColor={this.getColor.bind(this)} />
+        <Pixel newColor={this.getColor.bind(this)} />
+        <Pixel newColor={this.getColor.bind(this)} />
+        <Pixel newColor={this.getColor.bind(this)} />
+        <Pixel newColor={this.getColor.bind(this)} />
+        <Pixel newColor={this.getColor.bind(this)} />
+        <Pixel newColor={this.getColor.bind(this)} />
       </div>
     );
   }

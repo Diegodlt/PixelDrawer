@@ -16,7 +16,7 @@ class Pixel extends Component{
     }
 
     render(){
-        console.log("Render")
+        console.log("[Pixel.js] Render");
         return(
             <div 
             className="Pixel" 

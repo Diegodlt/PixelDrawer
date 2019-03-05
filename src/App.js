@@ -8,15 +8,17 @@ const PIXEL_SIZE = 10;
 class App extends Component {
 
   state = {
-    color: "white",
-    columns: 50,
-    rows : 50,
-    clicked: false
+    color: "#ffffff",
+    columns: 20,
+    rows : 20,
+    clicked: false,
+    reset: false
   }
 
   changeColor = event => {
     this.setState({
-      color: event.target.value
+      color: event.target.value,
+      reset: false
     });
   }
 
@@ -26,7 +28,6 @@ class App extends Component {
   }
 
   addColumn = () =>{
-    // console.log("ADDCOLUMN");
     let colums = this.state.columns + 1;
     this.setState({columns: colums})
   }
@@ -54,7 +55,28 @@ class App extends Component {
     this.setState({clicked: false});
   }
 
+  changeInput = (e) =>{
+    this.setState({columnValue: e.target.value})
+  }
+
+  clearBoard = () =>{
+    this.setState({
+      color: "#ffffff",
+      reset: true
+    })
+  }
+
+  resetBoard = () =>{
+    this.setState({
+      color:"#ffffff",
+      reset: true,
+      columns: 20,
+      rows: 20
+    });
+  }
+
   render() {
+    console.log("[App.js] Render");
     let board = [];
 
     for(let i = 0; i < this.state.rows; i++){
@@ -62,26 +84,34 @@ class App extends Component {
         <PixelRow 
           columns={this.state.columns} 
           key={i} 
-          newColor={this.getColor.bind(this)}
+          color={this.state.color}
+          reset={this.state.reset}
           clicked={this.state.clicked} />);
     }
 
     return (
       <div className="App">
-        <input type="color" className="ColorInput" onChange={this.changeColor}/>
-        <div>
-          <span className="Controls">Row</span>
-          <span className="Controls" onClick={this.addRow}>Add row</span>
-          <span className="Controls" onClick={this.removeRow}>Remove row</span>
-        </div>
-        <div>
-          <span className="Controls" >Column</span>
-          <span className="Controls" onClick={this.addColumn}>Add column</span>
-          <span className="Controls" onClick={this.removeColumn}>Remove column</span>
+        <div className="ControlPanel">
+          <div>
+            <span className="Controls">Row</span>
+            <button className="Controls Add" onClick={this.removeRow}>-</button>
+            <button className="Controls Add" onClick={this.addRow}>+</button>
+            <span className="Controls">{this.state.rows}</span>
+          </div>
+          <div>
+            <span className="Controls" >Column</span>
+            <button className="Controls Add" onClick={this.removeColumn}>-</button>
+            <button className="Controls Add" onClick={this.addColumn}>+</button>
+            <span className="Controls">{this.state.columns}</span>
+          </div>
+          <div>
+            <button className="Controls" onClick={this.clearBoard}>Clear</button>
+            <button className="Controls" onClick={this.resetBoard}>Reset</button>
+          </div>
+          <input type="color" className="ColorInput" value={this.state.color} onChange={this.changeColor}/>
         </div>
         <div 
           className={"Board"}
-          draggable={false}
           onMouseDown={this.clickedHandler} 
           onMouseUp={this.unClickedHandler}
           onMouseLeave={this.unClickedHandler}

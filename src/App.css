@@ -16,10 +16,21 @@
   -ms-user-select: none;
   user-select: none;
   margin: 50px auto;
-  padding: 10px;
-  border: 1px solid black;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
 }
 
-.Controls{
-  padding: 10px;
+.ControlPanel{
+  text-align: center;
 }
+.Controls{
+  margin: 20px 10px;
+  display: inline-block;
+  width: 50px;
+}
+
+/* .Add{
+  color: white;
+  background-color: lightblue;
+  font-size: 1.5em;
+} */

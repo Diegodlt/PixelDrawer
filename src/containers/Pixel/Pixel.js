@@ -4,33 +4,51 @@ import './Pixel.css';
 class Pixel extends Component{
 
     state = {
-        color: "white"
+        pixelColor: "white",
+        selectedColor: this.props.color
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+        if(nextProps.color === this.state.pixelColor){
+            return false;
+        }
+        return true;
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps.color === this.props.color){
+            return;
+        }
+
+        if(this.props.reset){
+            this.setState({pixelColor: "white"})
+        }
     }
 
     colorChangerHandler = () => {
-        let colorSelected = this.props.newColor();
-        if(colorSelected === this.state.color){
+        let colorSelected = this.props.color;
+        if(colorSelected === this.state.pixelColor){
             return;
         }
-        this.setState({color: this.props.newColor()})
+        this.setState({pixelColor: colorSelected});
     }
 
     dragHandler = () => {
         if(this.props.clicked){
-            let colorSelected = this.props.newColor();
-            if(colorSelected === this.state.color){
+            let colorSelected = this.props.color;
+            if(colorSelected === this.state.pixelColor){
                 return;
             }
-            this.setState({color: this.props.newColor()})
+            this.setState({pixelColor: colorSelected});
         }
     }
 
     render(){
+        console.log("[Pixel.js] Render");
         return(
             <div 
             className="Pixel" 
-            draggable={false}
-            style={{backgroundColor: this.state.color}} 
+            style={{backgroundColor: this.state.pixelColor}} 
             onClick={this.colorChangerHandler}
             onMouseEnter={this.dragHandler}></div>
         );

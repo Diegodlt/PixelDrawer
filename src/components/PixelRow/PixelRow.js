@@ -8,13 +8,16 @@ const pixelRow = props => {
     let row = [];
 
     for(let i = 0; i < props.columns; i++){
-        row.push(<Pixel key={i} newColor={props.newColor} clicked={props.clicked}/>);
+        row.push(
+            <Pixel 
+                key={i} 
+                color={props.color} 
+                clicked={props.clicked} 
+                reset={props.reset}/>);
     }
 
     return(
-        <div 
-            draggable={false}
-            className={"PixelRow"}>{row}</div>
+        <React.Fragment>{row}</React.Fragment>
     );
     
 }

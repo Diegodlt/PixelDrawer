@@ -3,12 +3,15 @@ import React, { Component } from 'react';
 import './App.css';
 import PixelRow from './components/PixelRow/PixelRow';
 
+const PIXEL_SIZE = 10;
+
 class App extends Component {
 
   state = {
     color: "white",
-    columns: 5,
-    rows : 5
+    columns: 50,
+    rows : 50,
+    clicked: false
   }
 
   changeColor = event => {
@@ -23,7 +26,7 @@ class App extends Component {
   }
 
   addColumn = () =>{
-    console.log("ADDCOLUMN");
+    // console.log("ADDCOLUMN");
     let colums = this.state.columns + 1;
     this.setState({columns: colums})
   }
@@ -43,23 +46,48 @@ class App extends Component {
     this.setState({rows: rows});
   }
 
+  clickedHandler = () => {
+    this.setState({clicked: true})
+  }
+
+  unClickedHandler = () => {
+    this.setState({clicked: false});
+  }
+
   render() {
-    console.log("[App.js] Render");
     let board = [];
 
     for(let i = 0; i < this.state.rows; i++){
-      board.push(<PixelRow columns={this.state.columns} newColor={this.getColor.bind(this)} />);
+      board.push(
+        <PixelRow 
+          columns={this.state.columns} 
+          key={i} 
+          newColor={this.getColor.bind(this)}
+          clicked={this.state.clicked} />);
     }
 
     return (
       <div className="App">
         <input type="color" className="ColorInput" onChange={this.changeColor}/>
-        <p onClick={this.addRow}>Add row</p>
-        <p onClick={this.removeRow}>Remove row</p>
-        <p onClick={this.addColumn}>Add column</p>
-        <p onClick={this.removeColumn}>Remove column</p>
-        {/* <PixelRow columns={this.state.columns} newColor={this.getColor.bind(this)} /> */}
-        {board}
+        <div>
+          <span className="Controls">Row</span>
+          <span className="Controls" onClick={this.addRow}>Add row</span>
+          <span className="Controls" onClick={this.removeRow}>Remove row</span>
+        </div>
+        <div>
+          <span className="Controls" >Column</span>
+          <span className="Controls" onClick={this.addColumn}>Add column</span>
+          <span className="Controls" onClick={this.removeColumn}>Remove column</span>
+        </div>
+        <div 
+          className={"Board"}
+          draggable={false}
+          onMouseDown={this.clickedHandler} 
+          onMouseUp={this.unClickedHandler}
+          onMouseLeave={this.unClickedHandler}
+          style={{width: this.state.columns * PIXEL_SIZE, height: this.state.rows * PIXEL_SIZE}}>
+          {board}
+        </div>
       </div>
     );
   }

@@ -15,13 +15,24 @@ class Pixel extends Component{
         this.setState({color: this.props.newColor()})
     }
 
+    dragHandler = () => {
+        if(this.props.clicked){
+            let colorSelected = this.props.newColor();
+            if(colorSelected === this.state.color){
+                return;
+            }
+            this.setState({color: this.props.newColor()})
+        }
+    }
+
     render(){
-        console.log("[Pixel.js] Render");
         return(
             <div 
             className="Pixel" 
+            draggable={false}
             style={{backgroundColor: this.state.color}} 
-            onClick={this.colorChangerHandler}></div>
+            onClick={this.colorChangerHandler}
+            onMouseEnter={this.dragHandler}></div>
         );
     }
 }

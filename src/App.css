@@ -2,6 +2,9 @@
   text-align: inherit;
 }
 
+h1{
+  text-align: center;
+}
 .ColorInput{
   display: block;
   margin: auto;
@@ -18,19 +21,38 @@
   margin: 50px auto;
   border-top: 1px solid black;
   border-right: 1px solid black;
+  box-shadow: 2px 2px 1px 1px #c5c5c5;
 }
 
 .ControlPanel{
+  /* color: white; */
+  font-weight: 500;
   text-align: center;
+  margin: 50px 0 30px 0;
+  padding: 20px;
+  background-color: rgba(245, 245, 245, 1);
+  box-shadow: 1px 1px 1px 1px #c5c5c5;
 }
 .Controls{
   margin: 20px 10px;
   display: inline-block;
-  width: 50px;
+  width: 70px;
 }
 
-/* .Add{
+.Add{
   color: white;
+  border: none;
+  box-shadow: 0;
+  border-radius: 2px;
   background-color: lightblue;
   font-size: 1.5em;
-} */
+}
+
+.Reset{
+  border: 1px solid #dd1327;
+  color: #dd1327;
+  background-color: inherit;
+  border-radius: 2px;
+  width: 100px;
+  padding: 7px;
+}

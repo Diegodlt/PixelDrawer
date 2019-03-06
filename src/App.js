@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import './App.css';
 import PixelRow from './components/PixelRow/PixelRow';
 
-const PIXEL_SIZE = 10;
+const PIXEL_SIZE = 20;
+const INCREMENT = 1;
 
 class App extends Component {
 
@@ -22,28 +23,23 @@ class App extends Component {
     });
   }
 
-  // This will allow the Pixel class to get the current color selected
-  getColor = () =>{
-    return this.state.color;
-  }
-
   addColumn = () =>{
-    let colums = this.state.columns + 1;
+    let colums = this.state.columns + INCREMENT;
     this.setState({columns: colums})
   }
 
   removeColumn = () =>{
-    let colums = this.state.columns - 1;
+    let colums = this.state.columns - INCREMENT;
     this.setState({columns: colums})
   }
 
   addRow = () =>{
-    let rows = this.state.rows + 1;
+    let rows = this.state.rows + INCREMENT;
     this.setState({rows: rows});
   }
 
   removeRow = () =>{
-    let rows = this.state.rows - 1;
+    let rows = this.state.rows - INCREMENT;
     this.setState({rows: rows});
   }
 
@@ -76,7 +72,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("[App.js] Render");
+
     let board = [];
 
     for(let i = 0; i < this.state.rows; i++){
@@ -91,22 +87,23 @@ class App extends Component {
 
     return (
       <div className="App">
+        <h1>Pixel Drawer</h1>
         <div className="ControlPanel">
           <div>
-            <span className="Controls">Row</span>
+            <span className="Controls">Rows</span>
             <button className="Controls Add" onClick={this.removeRow}>-</button>
             <button className="Controls Add" onClick={this.addRow}>+</button>
             <span className="Controls">{this.state.rows}</span>
           </div>
           <div>
-            <span className="Controls" >Column</span>
+            <span className="Controls" >Columns</span>
             <button className="Controls Add" onClick={this.removeColumn}>-</button>
             <button className="Controls Add" onClick={this.addColumn}>+</button>
             <span className="Controls">{this.state.columns}</span>
           </div>
           <div>
-            <button className="Controls" onClick={this.clearBoard}>Clear</button>
-            <button className="Controls" onClick={this.resetBoard}>Reset</button>
+            <button className="Controls Reset" onClick={this.clearBoard}>Clear</button>
+            <button className="Controls Reset" onClick={this.resetBoard}>Reset</button>
           </div>
           <input type="color" className="ColorInput" value={this.state.color} onChange={this.changeColor}/>
         </div>

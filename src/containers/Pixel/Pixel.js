@@ -49,7 +49,7 @@ class Pixel extends Component{
             <div 
             className="Pixel" 
             style={{backgroundColor: this.state.pixelColor}} 
-            onClick={this.colorChangerHandler}
+            onMouseDown={this.colorChangerHandler}
             onMouseEnter={this.dragHandler}></div>
         );
     }

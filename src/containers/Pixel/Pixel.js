@@ -4,8 +4,7 @@ import './Pixel.css';
 class Pixel extends Component{
 
     state = {
-        pixelColor: "white",
-        selectedColor: this.props.color
+        pixelColor: "white"
     }
 
     shouldComponentUpdate(nextProps, nextState){
